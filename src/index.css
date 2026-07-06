@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FONTS — used by the five design variants.
+   font-cormorant · font-fraunces · font-anton · font-script ·
+   font-jost · font-marcellus
+   ============================================================ */
+@theme {
+  --font-jost: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-cormorant: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-fraunces: "Fraunces", ui-serif, Georgia, serif;
+  --font-marcellus: "Marcellus", ui-serif, Georgia, serif;
+  --font-anton: "Anton", ui-sans-serif, sans-serif;
+  --font-script: "Great Vibes", cursive;
+}
+
+html {
+  /* Smooth scrolling for the in-page navigation links */
+  scroll-behavior: smooth;
+}
+
+/* Keep section headings clear of the sticky navbar when jumping to anchors */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+body {
+  @apply font-jost antialiased;
+}
+
+/* Fade-in-on-scroll animation (driven by the Reveal component) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Ambient animations (used by the Atelier variant) ---- */
+
+/* Hero photo blob slowly shifts its organic shape */
+@keyframes blob-morph {
+  0%, 100% { border-radius: 58% 42% 55% 45% / 48% 55% 45% 52%; }
+  33% { border-radius: 45% 55% 48% 52% / 55% 44% 56% 45%; }
+  66% { border-radius: 52% 48% 42% 58% / 45% 56% 44% 55%; }
+}
+.anim-blob {
+  animation: blob-morph 16s ease-in-out infinite;
+}
+
+/* Botanical sprigs sway gently */
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(4deg); }
+}
+.anim-sway {
+  animation: sway 6s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+
+/* Decorative line draws itself in (path needs pathLength="1") */
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+.anim-draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 2s ease-out 0.7s forwards;
+}
+
+/* Infinite scrolling text strip (two identical copies → seamless -50%) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.anim-marquee {
+  animation: marquee 28s linear infinite;
+}
+.anim-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .anim-blob,
+  .anim-sway,
+  .anim-marquee {
+    animation: none;
+  }
+  .anim-draw path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
