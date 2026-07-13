@@ -2,77 +2,63 @@
    PORTFOLIO DATA — this is the ONLY file you need to edit to change the
    content of your website. Every section reads from here.
 
-   Anything wrapped in [square brackets] is a PLACEHOLDER for you to fill in.
+   Everything here comes from Jasmine's resume. A couple of fields are left
+   null on purpose (e.g. LinkedIn/GitHub, resume PDF) — fill them in when ready
+   and the matching part of the site turns on automatically.
    ========================================================================== */
 
 // --------------------------------------------------------------------------
 // BASICS — your name and title (shown in the navbar, hero, and footer)
+// NOTE: street address and phone number are intentionally left off the public
+// site for privacy. Only city-level location and email are shown.
 // --------------------------------------------------------------------------
 export const basics = {
   name: 'Jasmine Wang',
   title: 'High School Student',
-  location: 'Thornhill, Ontario', // EDIT: or delete this line to hide it
+  location: 'Thornhill, Ontario', // city only — no street address on purpose
 
-  // EDIT: your hero headline — a short, punchy line about you
-  headline: '[Your headline goes here — one short sentence about who you are]',
+  // Hero headline — a short, punchy line about you (from your resume)
+  headline: 'High school student, summer-camp volunteer, and creator of the study website Bloom.',
 
-  // EDIT: a 1–2 sentence introduction shown under the headline
+  // A 1–2 sentence introduction shown under the headline
   intro:
-    '[Short introduction goes here. Two sentences about what you do, what you care about, and what you are working toward.]',
+    "I'm a high school student in Thornhill, Ontario. I've volunteered 75+ hours with children at art and language summer camps, hold certifications in lifesaving, first aid, and ski instruction, and recently designed and built Bloom — a study website that helps students stay organized and productive.",
 };
 
 // --------------------------------------------------------------------------
-// ABOUT — replace this placeholder with your own paragraph
+// ABOUT
 // --------------------------------------------------------------------------
 export const about = {
-  text: 'About me text goes here. Add a short paragraph about your interests, goals, strengths, and what you are currently learning.',
-  // EDIT: a few quick facts shown beside the paragraph (or set to [])
+  text: "I'm a high school student at St. Robert Catholic High School, graduating in 2028. Over the past year I've volunteered more than 75 hours at summer camps — supporting and supervising children at Tzu Chi Canada's Chinese camp and Lolart's art camp — and I'm a member of my school's rock climbing team. I hold Bronze Cross, First Aid + CPR, and CSIA Level 1 ski-instructor certifications, and I've earned Certificates of Distinction in the Cayley, Galois, and Canadian Intermediate mathematics contests. Most recently, I designed and built Bloom, a study website that helps students organize their work and stay productive.",
+  // A few quick facts shown beside the paragraph
   facts: [
-    { label: 'Currently learning', value: '[Add here]' },
-    { label: 'Interests', value: '[Add here]' },
-    { label: 'Goal', value: '[Add here]' },
+    { label: 'Based in', value: 'Thornhill, Ontario' },
+    { label: 'Studies at', value: 'St. Robert CHS · Class of 2028' },
+    { label: 'Latest project', value: 'Bloom — a study website' },
   ],
 };
 
 // --------------------------------------------------------------------------
-// PROJECTS — replace these placeholder cards with real projects.
-// To add a project: copy one { ... } block, paste it, and edit the fields.
-// Set `status` to 'Completed' / 'In Progress' and `link` to a URL when ready.
+// PROJECTS — from your resume.
+// To add a project: copy the { ... } block, paste it, and edit the fields.
+// Set `link` to a URL to turn the "View project" button on.
 // --------------------------------------------------------------------------
 export const projects = [
   {
-    title: '[Project Title 1]',
-    category: '[Category — e.g. Web App, Research, Art]',
+    title: 'Bloom',
+    category: 'Personal Project · June 2026',
     description:
-      '[Project description goes here. Explain what you built, why, and what you learned.]',
-    tools: ['[Tool 1]', '[Tool 2]', '[Tool 3]'],
-    status: 'Coming Soon',
-    image: null, // EDIT: put an image in /public and use e.g. '/project1.png'
-    link: null, // EDIT: add a URL to enable the button
-  },
-  {
-    title: '[Project Title 2]',
-    category: '[Category]',
-    description: '[Project description goes here.]',
-    tools: ['[Tool 1]', '[Tool 2]'],
-    status: 'Coming Soon',
-    image: null,
-    link: null,
-  },
-  {
-    title: '[Project Title 3]',
-    category: '[Category]',
-    description: '[Project description goes here.]',
-    tools: ['[Tool 1]', '[Tool 2]'],
-    status: 'Coming Soon',
-    image: null,
-    link: null,
+      'A study website I designed and built to help students organize their studying and stay productive. I planned the layout, features, and visual design, and developed the site myself.',
+    tools: ['Web Design', 'Layout & Features', 'Visual Design'],
+    status: 'Completed',
+    image: null, // EDIT: add a screenshot to /public and use e.g. '/bloom.png'
+    link: 'https://bloomgardenapp.github.io/',
   },
 ];
 
 // --------------------------------------------------------------------------
-// SKILLS — from your resume, plus empty slots for future skills.
-// `placeholder: true` renders the card in a dashed "add later" style.
+// SKILLS — from your resume.
+// (You can add more later: copy a block and edit the fields.)
 // --------------------------------------------------------------------------
 export const skills = [
   {
@@ -90,10 +76,6 @@ export const skills = [
     detail: 'Comfortable working in changing environments with different tasks',
     placeholder: false,
   },
-  // Future skill slots — replace the fields and set placeholder to false:
-  { name: '[Future skill]', detail: '[Short description]', placeholder: true },
-  { name: '[Future skill]', detail: '[Short description]', placeholder: true },
-  { name: '[Future skill]', detail: '[Short description]', placeholder: true },
 ];
 
 // --------------------------------------------------------------------------
@@ -127,19 +109,20 @@ export const experience = [
 ];
 
 // --------------------------------------------------------------------------
-// ACHIEVEMENTS — from your resume, plus placeholder cards for future ones.
+// ACHIEVEMENTS — from your resume.
+// (issuer / detail are optional; leave as null if you don't want to show one.)
 // --------------------------------------------------------------------------
 export const achievements = [
   {
     title: 'Bronze Cross Certification',
     issuer: 'Lifesaving Society',
-    detail: '[Optional: add the year here]',
+    detail: null,
     placeholder: false,
   },
   {
     title: 'First Aid + CPR Certification',
-    issuer: '[Optional: add the issuing organization]',
-    detail: '[Optional: add the year here]',
+    issuer: null,
+    detail: null,
     placeholder: false,
   },
   {
@@ -154,19 +137,6 @@ export const achievements = [
     detail: 'Cayley, Galois, and Canadian Intermediate Mathematics Contest (CIMC)',
     placeholder: false,
   },
-  // Future achievement slots:
-  {
-    title: '[Future achievement]',
-    issuer: '[Issuer]',
-    detail: '[Details]',
-    placeholder: true,
-  },
-  {
-    title: '[Future achievement]',
-    issuer: '[Issuer]',
-    detail: '[Details]',
-    placeholder: true,
-  },
 ];
 
 // --------------------------------------------------------------------------
@@ -176,12 +146,12 @@ export const education = [
   {
     school: 'St. Robert Catholic High School',
     detail: 'High School · Graduating 2028',
-    note: '[Optional: add a program, favourite subjects, or activities]',
+    note: null, // EDIT: add a program, favourite subjects, or activities
   },
   {
     school: 'Bayview Glen Independent School',
     detail: 'Middle School',
-    note: '[Optional note]',
+    note: null,
   },
 ];
 
@@ -204,12 +174,12 @@ export const resume = {
 };
 
 // --------------------------------------------------------------------------
-// CONTACT — your email is real; fill in the rest when ready
+// CONTACT — your email is real; add LinkedIn/GitHub later if you want them shown
 // --------------------------------------------------------------------------
 export const contact = {
   email: 'tojasmineewang@gmail.com',
   linkedin: null, // EDIT: e.g. 'https://www.linkedin.com/in/your-profile'
   github: null, // EDIT: e.g. 'https://github.com/your-username'
   message:
-    '[Contact message goes here — e.g. "I’m always happy to connect about volunteering, school projects, or opportunities."]',
+    "I'm always happy to connect about volunteering, working with kids, or school and coding projects. The best way to reach me is by email.",
 };

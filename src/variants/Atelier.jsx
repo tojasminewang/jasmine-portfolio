@@ -369,14 +369,14 @@ export default function Atelier() {
           <div className="flex items-end justify-between border-b border-[#414a3d]/20 pb-4">
             <Eyebrow>Featured work</Eyebrow>
             <p className="font-jost text-xs font-medium uppercase tracking-[0.22em] text-[#414a3d]/70">
-              Projects coming soon
+              Personal projects
             </p>
           </div>
         </Reveal>
         {/* EDIT: projects in portfolioData.js */}
-        <div className="mt-10 grid gap-10 sm:grid-cols-3">
+        <div className="mt-10 flex flex-wrap justify-center gap-10">
           {projects.map((project, i) => (
-            <Reveal key={project.title} delay={i * 120}>
+            <Reveal key={project.title} delay={i * 120} className="w-full max-w-xs">
               <article className="group text-center">
                 <div className="overflow-hidden transition-transform duration-500 group-hover:-translate-y-1.5">
                   <div
@@ -399,9 +399,11 @@ export default function Atelier() {
                 <p className="mx-auto mt-2.5 max-w-xs font-jost text-sm leading-relaxed text-[#414a3d]/80">
                   {project.description}
                 </p>
-                <p className="mt-3 font-jost text-xs font-medium uppercase tracking-[0.18em] text-[#9c5f3a]">
-                  {project.tools.join(' · ')}
-                </p>
+                {project.tools.length > 0 && (
+                  <p className="mt-3 font-jost text-xs font-medium uppercase tracking-[0.18em] text-[#9c5f3a]">
+                    {project.tools.join(' · ')}
+                  </p>
+                )}
                 <div className="mt-4">
                   {project.link ? (
                     <OutlineButton href={project.link}>View project</OutlineButton>
@@ -518,10 +520,14 @@ export default function Atelier() {
                   }`}
                 >
                   <h3 className="font-cormorant text-3xl text-[#faf7ef]">{item.title}</h3>
-                  <p className="mt-1.5 font-jost text-xs font-semibold uppercase tracking-[0.18em] text-[#f0ece0]">
-                    {item.issuer}
-                  </p>
-                  <p className="mt-2 font-jost text-sm italic text-[#faf7ef]/85">{item.detail}</p>
+                  {item.issuer && (
+                    <p className="mt-1.5 font-jost text-xs font-semibold uppercase tracking-[0.18em] text-[#f0ece0]">
+                      {item.issuer}
+                    </p>
+                  )}
+                  {item.detail && (
+                    <p className="mt-2 font-jost text-sm italic text-[#faf7ef]/85">{item.detail}</p>
+                  )}
                 </div>
               </Reveal>
             ))}
@@ -548,7 +554,9 @@ export default function Atelier() {
                 <p className="mt-2 font-jost text-xs font-semibold uppercase tracking-[0.2em] text-[#9c5f3a]">
                   {school.detail}
                 </p>
-                <p className="mt-3 font-jost text-sm italic text-[#414a3d]/75">{school.note}</p>
+                {school.note && (
+                  <p className="mt-3 font-jost text-sm italic text-[#414a3d]/75">{school.note}</p>
+                )}
               </div>
             </Reveal>
           ))}
@@ -634,10 +642,12 @@ export default function Atelier() {
             <ul className="flex h-full flex-col justify-center gap-6">
               {[
                 { label: 'Email', value: contact.email, href: `mailto:${contact.email}` },
-                { label: 'LinkedIn', value: contact.linkedin ?? '[Add your LinkedIn URL]', href: contact.linkedin },
-                { label: 'GitHub', value: contact.github ?? '[Add your GitHub URL]', href: contact.github },
+                contact.linkedin && { label: 'LinkedIn', value: contact.linkedin, href: contact.linkedin },
+                contact.github && { label: 'GitHub', value: contact.github, href: contact.github },
                 { label: 'Based in', value: basics.location, href: null },
-              ].map((row) => (
+              ]
+                .filter(Boolean)
+                .map((row) => (
                 <li
                   key={row.label}
                   className="flex items-center gap-5 border-b border-[#414a3d]/15 pb-4 transition-all duration-500 hover:border-[#b0714a]/50 hover:pl-2"
