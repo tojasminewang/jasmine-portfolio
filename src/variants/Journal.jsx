@@ -384,28 +384,6 @@ export default function Journal() {
         </div>
       </section>
 
-      {/* ---------- Resume (striped band) ---------- */}
-      <section id="resume" style={STRIPES}>
-        <div className="mx-auto max-w-2xl px-5 py-14 sm:py-16">
-          <Reveal>
-            <div className="bg-[#fbf6e3]/95 px-8 py-12 text-center">
-              <Flower className="mx-auto h-12 w-12" />
-              {/* EDIT: resume in portfolioData.js — set resume.url to enable the button */}
-              <h2 className="mt-3 font-marcellus text-3xl">
-                {resume.url ? 'My resume is ready' : resume.comingSoonText}
-              </h2>
-              <div className="mt-6">
-                {resume.url ? (
-                  <OliveButton href={resume.url}>Download resume</OliveButton>
-                ) : (
-                  <OliveButton disabled>Download resume</OliveButton>
-                )}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ---------- Contact + Footer (powder blue) ---------- */}
       <section id="contact" style={{ backgroundColor: BLUE }}>
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:py-20 lg:grid-cols-3">

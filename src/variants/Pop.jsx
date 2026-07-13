@@ -419,29 +419,6 @@ export default function Pop() {
         </div>
       </section>
 
-      {/* ---------- Resume ---------- */}
-      <section id="resume" className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-[#3c2415] p-10 text-center sm:p-14">
-            <Starburst className="absolute left-8 top-8 h-8 w-8 text-[#f04e23]" />
-            <Starburst className="absolute bottom-8 right-8 h-6 w-6 text-[#f7a8c4]" />
-            {/* EDIT: resume in portfolioData.js — set resume.url to enable the button */}
-            <h2 className="font-anton text-4xl uppercase text-[#fdf1e3] sm:text-5xl">
-              {resume.url ? 'Grab my resume' : resume.comingSoonText}
-            </h2>
-            <div className="mt-7">
-              {resume.url ? (
-                <PopButton href={resume.url}>Download resume</PopButton>
-              ) : (
-                <span className="inline-block cursor-not-allowed rounded-full border-2 border-dashed border-[#fdf1e3]/40 px-7 py-3 font-jost text-xs font-semibold uppercase tracking-[0.15em] text-[#fdf1e3]/50">
-                  Download resume
-                </span>
-              )}
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       {/* ---------- Contact ---------- */}
       <section id="contact" style={{ backgroundColor: ORANGE }}>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:py-20 lg:grid-cols-[1.3fr_1fr]">

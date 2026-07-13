@@ -13,7 +13,6 @@ export const NAV_LINKS = [
   { label: 'Achievements', href: '#achievements' },
   { label: 'Education', href: '#education' },
   { label: 'Languages', href: '#languages' },
-  { label: 'Resume', href: '#resume' },
   { label: 'Contact', href: '#contact' },
 ];
 

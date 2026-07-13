@@ -597,26 +597,6 @@ export default function Atelier() {
         </div>
       </section>
 
-      {/* ---------- Resume ---------- */}
-      <section id="resume" style={{ backgroundColor: BLUSH }}>
-        <div className="mx-auto max-w-3xl px-5 py-16 text-center sm:py-20">
-          <Reveal>
-            <p className="font-script text-4xl text-[#b0714a]">on paper</p>
-            {/* EDIT: resume in portfolioData.js — set resume.url to enable the button */}
-            <h2 className="mt-3 font-cormorant text-4xl sm:text-5xl">
-              {resume.url ? 'My resume is ready to download.' : resume.comingSoonText}
-            </h2>
-            <div className="mt-8">
-              {resume.url ? (
-                <OutlineButton href={resume.url}>Download resume</OutlineButton>
-              ) : (
-                <OutlineButton disabled>Download resume</OutlineButton>
-              )}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ---------- Contact ---------- */}
       <section id="contact" className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-2">

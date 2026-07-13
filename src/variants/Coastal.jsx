@@ -377,33 +377,6 @@ export default function Coastal() {
         </div>
       </section>
 
-      {/* ---------- Resume ---------- */}
-      <section id="resume" className="bg-[#43462c]">
-        <div className="mx-auto max-w-2xl px-5 py-16 text-center sm:py-20">
-          <Reveal>
-            <Caps className="text-[#eef0e3]/70">On paper</Caps>
-            {/* EDIT: resume in portfolioData.js — set resume.url to enable the button */}
-            <h2 className="mt-4 font-cormorant text-4xl text-[#eef0e3]">
-              {resume.url ? 'My resume is ready to download.' : resume.comingSoonText}
-            </h2>
-            <div className="mt-8">
-              {resume.url ? (
-                <a
-                  href={resume.url}
-                  className="inline-block bg-[#eef0e3] px-6 py-2.5 font-jost text-[10px] font-medium uppercase tracking-[0.3em] text-[#43462c] hover:bg-white"
-                >
-                  Download resume
-                </a>
-              ) : (
-                <span className="inline-block cursor-not-allowed border border-dashed border-[#eef0e3]/50 px-6 py-2.5 font-jost text-[10px] uppercase tracking-[0.3em] text-[#eef0e3]/60">
-                  Download resume
-                </span>
-              )}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ---------- Contact ---------- */}
       <section id="contact" className="mx-auto max-w-2xl px-5 py-16 text-center sm:py-20">
         <Reveal>

@@ -401,24 +401,6 @@ export default function Petal() {
         <Lace />
       </section>
 
-      {/* ---------- Resume ---------- */}
-      <section id="resume" className="mx-auto max-w-2xl px-5 py-14 text-center sm:py-16">
-        <Reveal>
-          <Diamond>My resume</Diamond>
-          {/* EDIT: resume in portfolioData.js — set resume.url to enable the button */}
-          <p className="mt-5 font-fraunces text-2xl italic text-[#5c4450]/85">
-            {resume.url ? 'My resume is ready to download!' : resume.comingSoonText}
-          </p>
-          <div className="mt-6">
-            {resume.url ? (
-              <PillButton href={resume.url}>Download resume</PillButton>
-            ) : (
-              <PillButton disabled>Download resume</PillButton>
-            )}
-          </div>
-        </Reveal>
-      </section>
-
       {/* ---------- Contact ---------- */}
       <section id="contact" style={{ backgroundColor: SAGE_SOFT }}>
         <Lace />
