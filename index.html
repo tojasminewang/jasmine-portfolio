@@ -4,6 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jasmine Wang · Portfolio</title>
+    <style>
+      /* First-paint styling so the page never flashes white or shows text in
+         the wrong font: cream background immediately, then the app fades in
+         once the web fonts are ready (main.jsx adds the app-ready class). */
+      html {
+        background-color: #f7f3ec;
+      }
+      #root {
+        opacity: 0;
+      }
+      html.app-ready #root {
+        opacity: 1;
+        transition: opacity 0.35s ease;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html.app-ready #root {
+          transition: none;
+        }
+      }
+    </style>
+    <noscript>
+      <style>
+        #root {
+          opacity: 1 !important;
+        }
+      </style>
+    </noscript>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
