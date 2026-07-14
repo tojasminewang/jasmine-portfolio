@@ -37,7 +37,7 @@ export const basics = {
 
   // A 1–2 sentence introduction shown under the headline
   intro:
-    "I'm a high school student in Thornhill, Ontario. I've spent more than 75 hours volunteering with kids at summer camps, and I hold certifications in lifesaving, first aid, and ski instruction.",
+    "I'm a high school student in Thornhill, Ontario, with interests in website design, technology, mathematics, and creative projects. Along with building digital projects, I have completed more than 75 hours of volunteer work and earned certifications in ski instruction, lifesaving, first aid, and CPR.",
 
   // EDIT: the illustration in the hero. To use a real photo of you instead,
   // drop it into src/assets/img, import it above, and point this at it.
@@ -48,7 +48,7 @@ export const basics = {
 // ABOUT
 // --------------------------------------------------------------------------
 export const about = {
-  text: "I'm a student at St. Robert Catholic High School, graduating in 2028. This past year I volunteered more than 75 hours at two summer camps, helping supervise children and keep the days running smoothly. Outside of class you'll find me on the school rock climbing team or on the ski hill, where I teach as a certified CSIA Level 1 instructor. I also hold Bronze Cross and First Aid + CPR certifications, and I've earned Certificates of Distinction in three University of Waterloo mathematics contests.",
+  text: "I'm a student at St. Robert Catholic High School, graduating in 2028. This past year I volunteered more than 75 hours at two summer camps, helping supervise children and supporting the camp counselors. Outside of class I enjoy mathematics, design, skiing, rock climbing, and learning new skills. I hope to continue developing and learning new skills while gaining experience through employment, volunteering, and personal projects.",
 
   // A few quick facts shown beside the paragraph
   facts: [
@@ -201,5 +201,5 @@ export const contact = {
   linkedin: null, // EDIT: e.g. 'https://www.linkedin.com/in/your-profile'
   github: null, // EDIT: e.g. 'https://github.com/your-username'
   message:
-    "I'm always happy to connect about volunteering, working with kids, or school and coding projects. The best way to reach me is by email.",
+    "I'm currently open to part-time employment and the best way to contact me is by email.",
 };
