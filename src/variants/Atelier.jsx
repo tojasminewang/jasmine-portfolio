@@ -8,6 +8,7 @@ import {
   achievements,
   education,
   languages,
+  availability,
   contact,
 } from '../data/portfolioData.js';
 import Reveal from '../components/Reveal.jsx';
@@ -431,9 +432,6 @@ export default function Atelier() {
             <svg viewBox="0 0 200 80" className="anim-draw absolute -bottom-6 -left-10 h-20 w-52 text-[#b0714a]/60" aria-hidden="true">
               <path d="M4 70C60 70 90 8 196 22" pathLength="1" stroke="currentColor" strokeWidth="1" fill="none" />
             </svg>
-            <p className="absolute -right-2 top-2 font-jost text-[10px] uppercase tracking-[0.3em] text-[#414a3d]/40">
-              {basics.title}
-            </p>
           </div>
         </Reveal>
       </section>
@@ -511,44 +509,54 @@ export default function Atelier() {
           </div>
         </Reveal>
         {/* EDIT: projects in portfolioData.js */}
-        <div className="mt-10 flex flex-wrap justify-center gap-10">
+        <div className="mt-12 space-y-16">
           {projects.map((project, i) => (
-            <Reveal key={project.title} delay={i * 120} className="w-full max-w-xs">
-              <Tilt>
-                <article className="group text-center">
-                <div className="overflow-hidden transition-transform duration-500 group-hover:-translate-y-1.5">
+            <Reveal key={project.title} delay={i * 120}>
+              <Tilt max={4}>
+                <article
+                  className={`group grid items-center gap-8 md:grid-cols-2 md:gap-14 ${
+                    i % 2 === 1 ? '' : ''
+                  }`}
+                >
                   <div
-                    className="flex aspect-[5/4] items-center justify-center px-6 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                    style={{ backgroundColor: [BLUSH, '#dfd9c6', '#cbb197'][i % 3] }}
+                    className={`flex items-center justify-center overflow-hidden border border-[#414a3d]/15 bg-[#f9f6ee] p-8 sm:p-12 ${
+                      i % 2 === 1 ? 'md:order-2' : ''
+                    }`}
+                    style={{ borderRadius: '999px 999px 14px 14px' }}
                   >
                     {project.image ? (
-                      <img src={project.image} alt={`${project.title} preview`} className="h-full w-full object-cover" />
+                      <img
+                        src={project.image}
+                        alt={`${project.title} logo`}
+                        className="aspect-square w-full max-w-xs object-contain transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                      />
                     ) : (
-                      <span className="border border-[#414a3d]/25 px-5 py-4 font-cormorant text-lg tracking-wide text-[#414a3d]/70 transition-colors duration-500 group-hover:border-[#b0714a]/60 group-hover:text-[#b0714a]">
+                      <span className="border border-[#414a3d]/25 px-5 py-4 font-cormorant text-lg tracking-wide text-[#414a3d]/70">
                         {project.title}
                       </span>
                     )}
                   </div>
-                </div>
-                <h3 className="mt-5 font-jost text-sm font-semibold uppercase tracking-[0.2em] text-[#414a3d]">
-                  {project.title}
-                </h3>
-                <p className="mt-1.5 font-cormorant text-xl italic text-[#414a3d]/80">{project.category}</p>
-                <p className="mx-auto mt-2.5 max-w-xs font-jost text-sm leading-relaxed text-[#414a3d]/80">
-                  {project.description}
-                </p>
-                {project.tools.length > 0 && (
-                  <p className="mt-3 font-jost text-xs font-medium uppercase tracking-[0.18em] text-[#9c5f3a]">
-                    {project.tools.join(' · ')}
-                  </p>
-                )}
-                <div className="mt-4">
-                  {project.link ? (
-                    <OutlineButton href={project.link}>View project</OutlineButton>
-                  ) : (
-                    <OutlineButton disabled>{project.status}</OutlineButton>
-                  )}
-                </div>
+                  <div>
+                    <p className="font-jost text-xs font-semibold uppercase tracking-[0.25em] text-[#9c5f3a]">
+                      {String(i + 1).padStart(2, '0')} · {project.category}
+                    </p>
+                    <h3 className="mt-3 font-cormorant text-4xl sm:text-5xl">{project.title}</h3>
+                    <p className="mt-4 max-w-md font-jost text-lg leading-relaxed text-[#414a3d]/90">
+                      {project.description}
+                    </p>
+                    {project.tools.length > 0 && (
+                      <p className="mt-4 font-jost text-xs font-medium uppercase tracking-[0.18em] text-[#9c5f3a]">
+                        {project.tools.join(' · ')}
+                      </p>
+                    )}
+                    <div className="mt-7">
+                      {project.link ? (
+                        <OutlineButton href={project.link}>View project</OutlineButton>
+                      ) : (
+                        <OutlineButton disabled>{project.status}</OutlineButton>
+                      )}
+                    </div>
+                  </div>
                 </article>
               </Tilt>
             </Reveal>
@@ -638,16 +646,36 @@ export default function Atelier() {
           </div>
           <Reveal delay={200}>
             <div
-              className="flex h-full min-h-64 flex-col items-center justify-center gap-3 px-8 py-12 text-center text-[#f4f0e4]"
-              style={{ backgroundColor: TERRA, borderRadius: '999px 999px 12px 12px' }}
+              className="relative flex h-full min-h-64 flex-col items-center justify-center gap-2 overflow-hidden px-8 py-12 text-center text-[#f4f0e4]"
+              style={{
+                background: 'radial-gradient(130% 100% at 50% 0%, #c48a5e 0%, #b0714a 55%, #9a5f3d 100%)',
+                borderRadius: '999px 999px 12px 12px',
+              }}
             >
-              <Sprig className="anim-sway h-10 w-8" stroke="#f4f0e4" />
-              <p className="font-cormorant text-5xl">
+              <div
+                className="pointer-events-none absolute inset-4 border border-[#f4f0e4]/25"
+                style={{ borderRadius: '999px 999px 8px 8px' }}
+                aria-hidden="true"
+              />
+              <Sprig className="anim-sway h-9 w-7" stroke="#f4f0e4" />
+              <p className="font-cormorant text-6xl leading-none">
                 <CountUp value={stats.totalHours} />
               </p>
-              <p className="font-jost text-xs font-medium uppercase tracking-[0.2em]">
-                volunteer hours across two summer camps
+              <p className="font-jost text-[11px] font-semibold uppercase tracking-[0.22em]">
+                volunteer hours
               </p>
+              {/* Per-camp breakdown, computed from the experience data */}
+              <div className="mt-3 w-full max-w-52 space-y-2 border-t border-[#f4f0e4]/30 pt-3">
+                {experience.map((job) => (
+                  <div
+                    key={job.organization}
+                    className="flex items-baseline justify-between gap-3 font-jost text-[10px] uppercase tracking-[0.1em] text-[#f4f0e4]/90"
+                  >
+                    <span className="truncate">{job.organization}</span>
+                    <span className="shrink-0 font-semibold">{parseInt(job.hours, 10)}h</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
@@ -768,9 +796,17 @@ export default function Atelier() {
         <div className="grid gap-10 lg:grid-cols-2">
           <Reveal>
             <div
-              className="flex h-full flex-col items-center justify-center gap-5 px-10 py-16 text-center text-[#f4f0e4]"
-              style={{ backgroundColor: OLIVE, borderRadius: '999px 999px 16px 16px' }}
+              className="relative flex h-full flex-col items-center justify-center gap-5 overflow-hidden px-10 py-16 text-center text-[#f4f0e4]"
+              style={{
+                background: 'radial-gradient(140% 110% at 50% 0%, #838d6a 0%, #77815f 55%, #697353 100%)',
+                borderRadius: '999px 999px 16px 16px',
+              }}
             >
+              <div
+                className="pointer-events-none absolute inset-4 border border-[#f4f0e4]/20"
+                style={{ borderRadius: '999px 999px 12px 12px' }}
+                aria-hidden="true"
+              />
               <Sprig className="h-10 w-8" stroke="#f4f0e4" />
               <h2 className="font-cormorant text-4xl sm:text-5xl leading-tight">Let’s get in touch.</h2>
               {/* EDIT: contact.message in portfolioData.js */}
@@ -783,38 +819,92 @@ export default function Atelier() {
             </div>
           </Reveal>
           <Reveal delay={150}>
-            {/* EDIT: contact in portfolioData.js */}
-            <ul className="flex h-full flex-col justify-center gap-6">
-              {[
-                { label: 'Email', value: contact.email, href: `mailto:${contact.email}` },
-                contact.linkedin && { label: 'LinkedIn', value: contact.linkedin, href: contact.linkedin },
-                contact.github && { label: 'GitHub', value: contact.github, href: contact.github },
-                { label: 'Based in', value: basics.location, href: null },
-              ]
-                .filter(Boolean)
-                .map((row) => (
-                <li
-                  key={row.label}
-                  className="flex items-center gap-5 border-b border-[#414a3d]/15 pb-4 transition-all duration-500 hover:border-[#b0714a]/50 hover:pl-2"
-                >
-                  <span className="w-24 shrink-0 font-jost text-xs font-semibold uppercase tracking-[0.2em] text-[#9c5f3a]">
-                    {row.label}
+            <div className="flex h-full flex-col justify-center">
+              {/* EDIT: contact in portfolioData.js */}
+              <ul className="flex flex-col gap-6">
+                {[
+                  { label: 'Email', value: contact.email, href: `mailto:${contact.email}` },
+                  contact.linkedin && { label: 'LinkedIn', value: contact.linkedin, href: contact.linkedin },
+                  contact.github && { label: 'GitHub', value: contact.github, href: contact.github },
+                  { label: 'Based in', value: basics.location, href: null },
+                ]
+                  .filter(Boolean)
+                  .map((row) => (
+                  <li
+                    key={row.label}
+                    className="flex items-center gap-5 border-b border-[#414a3d]/15 pb-4 transition-all duration-500 hover:border-[#b0714a]/50 hover:pl-2"
+                  >
+                    <span className="w-24 shrink-0 font-jost text-xs font-semibold uppercase tracking-[0.2em] text-[#9c5f3a]">
+                      {row.label}
+                    </span>
+                    {row.href ? (
+                      <a
+                        href={row.href}
+                        target={row.href.startsWith('mailto:') ? undefined : '_blank'}
+                        rel="noreferrer"
+                        className="truncate font-cormorant text-2xl hover:text-[#9c5f3a]"
+                      >
+                        {row.value}
+                      </a>
+                    ) : (
+                      <p className="truncate font-cormorant text-2xl text-[#414a3d]/80">{row.value}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+
+              {/* ---------- Availability ---------- */}
+              {/* EDIT: availability in portfolioData.js */}
+              <div className="mt-10">
+                <Eyebrow>Availability</Eyebrow>
+                <div className="mt-4 flex flex-wrap items-start gap-2.5" role="img" aria-label="Weekly availability">
+                  {availability.week.map((d, i) => (
+                    <span key={`${d.day}-${i}`} className="flex flex-col items-center gap-1.5">
+                      <span
+                        className={`h-3.5 w-3.5 rounded-full ${
+                          d.status === 'all-day'
+                            ? 'bg-[#77815f]'
+                            : d.status === 'after-school'
+                              ? 'border border-[#77815f]'
+                              : 'border border-[#414a3d]/25'
+                        }`}
+                        style={
+                          d.status === 'after-school'
+                            ? { background: 'linear-gradient(to top, #77815f 50%, transparent 50%)' }
+                            : undefined
+                        }
+                      />
+                      <span className="font-jost text-[10px] font-medium uppercase tracking-[0.1em] text-[#414a3d]/60">
+                        {d.day}
+                      </span>
+                    </span>
+                  ))}
+                  <span className="ml-4 flex flex-col gap-1.5 font-jost text-[9px] font-medium uppercase tracking-[0.14em] text-[#414a3d]/55">
+                    <span className="flex items-center gap-1.5">
+                      <span
+                        className="h-2 w-2 shrink-0 rounded-full border border-[#77815f]"
+                        style={{ background: 'linear-gradient(to top, #77815f 50%, transparent 50%)' }}
+                      />
+                      after school
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 shrink-0 rounded-full bg-[#77815f]" />
+                      all day
+                    </span>
                   </span>
-                  {row.href ? (
-                    <a
-                      href={row.href}
-                      target={row.href.startsWith('mailto:') ? undefined : '_blank'}
-                      rel="noreferrer"
-                      className="truncate font-cormorant text-2xl hover:text-[#9c5f3a]"
-                    >
-                      {row.value}
-                    </a>
-                  ) : (
-                    <p className="truncate font-cormorant text-2xl text-[#414a3d]/80">{row.value}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
+                </div>
+                <ul className="mt-5 space-y-2.5">
+                  {availability.details.map((slot) => (
+                    <li key={slot.label} className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+                      <span className="w-48 shrink-0 font-jost text-xs font-semibold uppercase tracking-[0.16em] text-[#9c5f3a]">
+                        {slot.label}
+                      </span>
+                      <span className="font-cormorant text-xl text-[#414a3d]/90">{slot.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

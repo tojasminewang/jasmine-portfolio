@@ -20,7 +20,7 @@ import lifesavingImg from '../assets/img/lifesaving.jpg';
 import firstAidImg from '../assets/img/first-aid.jpg';
 import skiImg from '../assets/img/ski.jpg';
 import mathImg from '../assets/img/math.jpg';
-import bloomSiteImg from '../assets/img/bloom-site.jpg';
+import bloomLogoImg from '../assets/img/bloom-logo.jpg';
 
 // --------------------------------------------------------------------------
 // BASICS — your name and title (shown in the navbar, hero, and footer)
@@ -75,7 +75,7 @@ export const projects = [
       'A study website that helps students organize their studying and stay productive. I planned the layout and features, designed the visuals, and built the site.',
     tools: ['Web Design', 'Layout & Features', 'Visual Design'],
     status: 'Completed',
-    image: bloomSiteImg, // a real screenshot of the live site
+    image: bloomLogoImg, // the Bloom Garden logo
     link: 'https://bloomgardenapp.github.io/',
   },
 ];
@@ -192,6 +192,28 @@ export const languages = [
   { name: 'Chinese', proficiency: 'Conversational', level: 2 },
   { name: 'French', proficiency: 'Basic', level: 1 },
 ];
+
+// --------------------------------------------------------------------------
+// AVAILABILITY — shown in the Contact section as a small weekly schedule.
+// EDIT the times below to match your real schedule.
+// `week` drives the little day dots: 'after-school' | 'all-day' | 'off'
+// --------------------------------------------------------------------------
+export const availability = {
+  week: [
+    { day: 'M', status: 'after-school' },
+    { day: 'T', status: 'after-school' },
+    { day: 'W', status: 'after-school' },
+    { day: 'T', status: 'after-school' },
+    { day: 'F', status: 'after-school' },
+    { day: 'S', status: 'all-day' },
+    { day: 'S', status: 'all-day' },
+  ],
+  details: [
+    { label: 'Weekdays', value: 'After school, from 4 p.m.' },
+    { label: 'Weekends', value: 'Flexible hours' },
+    { label: 'School breaks & summer', value: 'Fully available' },
+  ],
+};
 
 // --------------------------------------------------------------------------
 // CONTACT — your email is real; add LinkedIn/GitHub later to show them
