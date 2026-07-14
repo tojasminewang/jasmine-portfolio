@@ -48,7 +48,7 @@ export const basics = {
 // ABOUT
 // --------------------------------------------------------------------------
 export const about = {
-  text: "I'm a student at St. Robert Catholic High School, graduating in 2028. This past year I volunteered more than 75 hours at two summer camps, helping supervise children and supporting the camp counselors. Outside of class I enjoy mathematics, design, skiing, rock climbing, and learning new skills. I hope to continue developing and learning new skills while gaining experience through employment, volunteering, and personal projects.",
+  text: 'I am currently a student at St. Robert Catholic High School and will graduate in 2028. Outside of school, I enjoy creating websites, skiing, rock climbing, and working on creative projects. Through more than 75 hours of volunteer experience at summer camps, I have developed strong communication, teamwork, and responsibility skills.',
 
   // A few quick facts shown beside the paragraph
   facts: [
