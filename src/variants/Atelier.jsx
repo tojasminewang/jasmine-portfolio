@@ -467,7 +467,7 @@ export default function Atelier() {
 
       {/* ---------- About (olive band) ---------- */}
       <section id="about" style={{ backgroundColor: OLIVE }}>
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:py-20 lg:grid-cols-[1fr_1.4fr_1fr]">
+        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:py-20 lg:grid-cols-[1fr_1.4fr_1fr] lg:items-center">
           <Reveal>
             <figure className="mx-auto w-fit">
               {/* EDIT: about.image / about.imageCaption in portfolioData.js */}
