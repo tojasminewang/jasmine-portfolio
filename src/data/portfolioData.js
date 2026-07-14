@@ -222,7 +222,7 @@ export const languages = [
 export const availability = {
   // Shown as a badge in the hero and in the scrolling strip
   headline: 'Open to part-time work',
-  summary: 'Weekdays after school · Weekends · Breaks after 11 a.m.',
+  summary: 'Weekdays after school · Weekends · School breaks and summer from 11 a.m.',
   week: [
     { day: 'M', status: 'after-school' },
     { day: 'T', status: 'after-school' },
