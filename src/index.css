@@ -19,6 +19,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Never let a stray wide element shift the page sideways */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Keep section headings clear of the sticky navbar when jumping to anchors */
 section[id] {
   scroll-margin-top: 5rem;

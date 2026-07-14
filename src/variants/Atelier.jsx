@@ -31,6 +31,12 @@ const OLIVE = '#77815f';
 const TERRA = '#b0714a';
 const BLUSH = '#eee3d3';
 
+/* If an illustration ever fails to load (e.g. a stale cached page mid-deploy),
+   hide it so its frame stays clean instead of showing broken-image text. */
+const hideBroken = (e) => {
+  e.currentTarget.style.visibility = 'hidden';
+};
+
 function Eyebrow({ children, light = false }) {
   return (
     <p
@@ -423,13 +429,15 @@ export default function Atelier() {
           </div>
         </Reveal>
         <Reveal delay={150}>
-          <div className="relative mx-auto w-fit">
+          {/* Width never exceeds the screen (mobile) and height never exceeds the first screen (desktop) */}
+          <div
+            className="relative mx-auto w-full"
+            style={{ maxWidth: 'min(100%, calc(min(66vh, 35rem) * 0.8))' }}
+          >
             {/* EDIT: basics.heroImage in portfolioData.js — swap the illustration for a real portrait anytime */}
-            {/* Height-capped so the whole hero fits the first screen without scrolling */}
             <div
-              className="anim-blob relative overflow-hidden bg-[#eee3d3]"
+              className="anim-blob relative w-full overflow-hidden bg-[#eee3d3]"
               style={{
-                height: 'min(66vh, 35rem)',
                 aspectRatio: '4 / 5',
                 borderRadius: '58% 42% 55% 45% / 48% 55% 45% 52%',
                 transform: `translate3d(${par.x * 14}px, ${par.y * 14}px, 0)`,
@@ -437,6 +445,7 @@ export default function Atelier() {
               }}
             >
               <img
+                onError={hideBroken}
                 src={basics.heroImage}
                 alt="Illustration of a sunlit study desk with books and plants"
                 className="h-full w-full object-cover"
@@ -467,6 +476,7 @@ export default function Atelier() {
                 style={{ borderRadius: '999px 999px 8px 8px' }}
               >
                 <img
+                  onError={hideBroken}
                   src={about.image}
                   alt="Illustration of rock climbing gear"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:rotate-2 group-hover:scale-110"
@@ -543,6 +553,7 @@ export default function Atelier() {
                   >
                     {project.image ? (
                       <img
+                        onError={hideBroken}
                         src={project.image}
                         alt={`${project.title} logo`}
                         className="aspect-square w-full max-w-xs object-contain transition-transform duration-700 ease-out group-hover:scale-[1.05]"
@@ -662,6 +673,7 @@ export default function Atelier() {
                         style={{ borderRadius: '999px 999px 10px 10px' }}
                       >
                         <img
+                          onError={hideBroken}
                           src={job.image}
                           alt={`${job.role} illustration`}
                           className="h-full w-full object-cover transition-transform duration-700 group-hover:-rotate-2 group-hover:scale-110"
@@ -730,6 +742,7 @@ export default function Atelier() {
                   {item.image && (
                     <span className="mt-0.5 block h-16 w-16 shrink-0 overflow-hidden rounded-full border border-[#414a3d]/15 bg-[#eee3d3] sm:h-20 sm:w-20">
                       <img
+                        onError={hideBroken}
                         src={item.image}
                         alt=""
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
