@@ -87,16 +87,37 @@ export const skills = [
   {
     name: 'Child Supervision & Care',
     detail: 'Experienced in leading and supporting children',
+    tags: ['Summer camps', '75+ hours'],
     placeholder: false,
   },
   {
     name: 'Collaboration',
     detail: 'Worked closely with camp staff; member of the school rock climbing team',
+    tags: ['Camp staff', 'Climbing team'],
     placeholder: false,
   },
   {
     name: 'Adaptability & Flexibility',
     detail: 'Comfortable working in changing environments with different tasks',
+    tags: ['Fast learner', 'Varied tasks'],
+    placeholder: false,
+  },
+  {
+    name: 'Website Design',
+    detail: 'Planned, designed, and built Bloom, a study website for students',
+    tags: ['Bloom', 'Layout', 'Visual design'],
+    placeholder: false,
+  },
+  {
+    name: 'Communication',
+    detail: 'Developed across 75+ volunteer hours working with children and camp staff',
+    tags: ['English', 'Chinese', 'French'],
+    placeholder: false,
+  },
+  {
+    name: 'Responsibility',
+    detail: 'Trusted to supervise children; certified in lifesaving, first aid, and CPR',
+    tags: ['Bronze Cross', 'First Aid + CPR'],
     placeholder: false,
   },
 ];
@@ -141,14 +162,14 @@ export const achievements = [
   {
     title: 'Bronze Cross Certification',
     issuer: 'Lifesaving Society',
-    detail: null,
+    detail: 'Advanced lifesaving and water rescue training',
     image: lifesavingImg,
     placeholder: false,
   },
   {
     title: 'First Aid + CPR Certification',
     issuer: null,
-    detail: null,
+    detail: 'Emergency first aid and CPR response training',
     image: firstAidImg,
     placeholder: false,
   },
@@ -199,6 +220,9 @@ export const languages = [
 // `week` drives the little day dots: 'after-school' | 'all-day' | 'off'
 // --------------------------------------------------------------------------
 export const availability = {
+  // Shown as a badge in the hero and in the scrolling strip
+  headline: 'Open to part-time work',
+  summary: 'Weekdays after school · Weekends · Breaks after 11 a.m.',
   week: [
     { day: 'M', status: 'after-school' },
     { day: 'T', status: 'after-school' },
@@ -211,7 +235,50 @@ export const availability = {
   details: [
     { label: 'Weekdays', value: 'After school, from 4 p.m.' },
     { label: 'Weekends', value: 'Flexible hours' },
-    { label: 'School breaks & summer', value: 'Fully available' },
+    { label: 'School breaks & summer', value: 'After 11 a.m.' },
+  ],
+};
+
+// --------------------------------------------------------------------------
+// REFERENCES — organizations from your resume that employers can call.
+// These are the organizations' public phone numbers, not personal ones.
+// --------------------------------------------------------------------------
+export const references = {
+  intro:
+    'References are available. My volunteer supervisors and certifying organizations can be reached directly:',
+  volunteer: [
+    {
+      organization: 'Tzu Chi Canada Summer Camp',
+      role: 'Chinese Camp Volunteer, 2025',
+      phone: '647-901-2118',
+      location: 'North York, Ontario',
+    },
+    {
+      organization: 'Lolart Camp',
+      role: 'Art Camp Volunteer, 2025',
+      phone: '416-551-6951',
+      location: 'North York, Ontario',
+    },
+  ],
+  certifications: [
+    {
+      name: 'Lifesaving Society',
+      credential: 'Bronze Cross',
+      phone: '905-707-9495',
+      location: 'Thornhill, Ontario',
+    },
+    {
+      name: 'First Aid + CPR provider',
+      credential: 'First Aid + CPR Certification',
+      phone: '647-534-5101',
+      location: 'Concord, Ontario',
+    },
+    {
+      name: 'Uplands Ski Centre',
+      credential: 'CSIA Level 1 Ski Instructor',
+      phone: '613-267-7616',
+      location: 'Thornhill, Ontario',
+    },
   ],
 };
 

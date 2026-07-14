@@ -9,6 +9,7 @@ import {
   education,
   languages,
   availability,
+  references,
   contact,
 } from '../data/portfolioData.js';
 import Reveal from '../components/Reveal.jsx';
@@ -151,7 +152,7 @@ function CountUp({ value, duration = 1400 }) {
 /* Slow infinite text strip below the hero (pauses on hover) */
 function Marquee() {
   const stats = derivedStats();
-  const items = [basics.name, basics.title, basics.location];
+  const items = [basics.name, basics.title, basics.location, availability.headline];
   if (stats.gradYear) items.push(`Class of ${stats.gradYear}`);
   const copy = (hidden) => (
     <p
@@ -393,6 +394,19 @@ export default function Atelier() {
           <p className="mt-5 max-w-lg font-jost text-lg leading-relaxed text-[#414a3d]">
             {basics.intro}
           </p>
+          {/* Availability badge — EDIT: availability.headline / availability.summary in portfolioData.js */}
+          <a
+            href="#contact"
+            className="mt-6 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 rounded-full border border-[#77815f]/50 bg-[#77815f]/10 px-5 py-2.5 transition-colors duration-300 hover:border-[#77815f] hover:bg-[#77815f]/15"
+          >
+            <span className="anim-pulse-dot h-2 w-2 rounded-full bg-[#77815f]" aria-hidden="true" />
+            <span className="font-jost text-[11px] font-bold uppercase tracking-[0.18em] text-[#414a3d]">
+              {availability.headline}
+            </span>
+            <span className="hidden font-jost text-[11px] font-medium uppercase tracking-[0.12em] text-[#414a3d]/65 sm:inline">
+              · {availability.summary}
+            </span>
+          </a>
           {/* Signature — clicking it releases a quiet petal flourish */}
           <button
             type="button"
@@ -589,6 +603,18 @@ export default function Atelier() {
                   <p className="mt-2.5 font-jost text-base leading-relaxed text-[#414a3d]/85">
                     {skill.detail}
                   </p>
+                  {skill.tags?.length > 0 && (
+                    <div className="mt-3.5 flex flex-wrap gap-2">
+                      {skill.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-[#9c5f3a]/35 px-3 py-1 font-jost text-[10px] font-semibold uppercase tracking-[0.12em] text-[#9c5f3a] transition-colors duration-300 group-hover:border-[#9c5f3a]/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </Reveal>
             ))}
@@ -689,19 +715,17 @@ export default function Atelier() {
             <h2 className="mt-3 font-cormorant text-4xl sm:text-5xl text-[#f4f0e4]">Achievements</h2>
           </Reveal>
           {/* EDIT: achievements in portfolioData.js */}
-          <div className="mt-10 grid gap-x-12 gap-y-8 sm:grid-cols-2">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {achievements.map((item, i) => (
-              <Reveal key={`${item.title}-${i}`} delay={i * 90}>
+              <Reveal key={`${item.title}-${i}`} delay={i * 90} className="h-full">
                 <div
-                  className={`group flex gap-5 border-t pt-5 transition-all duration-500 ${
-                    item.placeholder
-                      ? 'border-dashed border-[#e8e3d2]/40 opacity-60'
-                      : 'border-[#e8e3d2]/50 hover:border-[#f4f0e4] hover:pl-3'
+                  className={`group flex h-full gap-5 rounded-2xl bg-[#f7f3ec] p-6 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg ${
+                    item.placeholder ? 'opacity-60' : ''
                   }`}
                 >
                   {/* EDIT: achievements[].image in portfolioData.js */}
                   {item.image && (
-                    <span className="mt-1 block h-16 w-16 shrink-0 overflow-hidden rounded-full border border-[#e8e3d2]/60 bg-[#f7f3ec]">
+                    <span className="mt-0.5 block h-16 w-16 shrink-0 overflow-hidden rounded-full border border-[#414a3d]/15 bg-[#eee3d3] sm:h-20 sm:w-20">
                       <img
                         src={item.image}
                         alt=""
@@ -710,14 +734,18 @@ export default function Atelier() {
                     </span>
                   )}
                   <div>
-                    <h3 className="font-cormorant text-3xl text-[#faf7ef]">{item.title}</h3>
+                    <h3 className="font-cormorant text-2xl leading-snug text-[#414a3d] sm:text-3xl">
+                      {item.title}
+                    </h3>
                     {item.issuer && (
-                      <p className="mt-1.5 font-jost text-xs font-semibold uppercase tracking-[0.18em] text-[#f0ece0]">
+                      <p className="mt-1.5 font-jost text-xs font-semibold uppercase tracking-[0.16em] text-[#9c5f3a]">
                         {item.issuer}
                       </p>
                     )}
                     {item.detail && (
-                      <p className="mt-2 font-jost text-sm italic text-[#faf7ef]/85">{item.detail}</p>
+                      <p className="mt-2 font-jost text-sm italic leading-relaxed text-[#414a3d]/80">
+                        {item.detail}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -787,6 +815,70 @@ export default function Atelier() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- References ---------- */}
+      <section id="references" style={{ backgroundColor: BLUSH }}>
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+          <Reveal>
+            <Eyebrow>Don’t just take my word for it</Eyebrow>
+            <h2 className="mt-3 font-cormorant text-4xl sm:text-5xl">References</h2>
+            {/* EDIT: references in portfolioData.js */}
+            <p className="mt-4 max-w-2xl font-jost text-base leading-relaxed text-[#414a3d]/85">
+              {references.intro}
+            </p>
+          </Reveal>
+          <div className="mt-10 grid gap-12 lg:grid-cols-2">
+            <Reveal delay={100}>
+              <h3 className="font-jost text-xs font-semibold uppercase tracking-[0.22em] text-[#9c5f3a]">
+                Volunteer supervisors
+              </h3>
+              <ul className="mt-5 space-y-6">
+                {references.volunteer.map((ref) => (
+                  <li
+                    key={ref.organization}
+                    className="border-t border-[#414a3d]/25 pt-4 transition-all duration-500 hover:border-[#b0714a] hover:pl-2"
+                  >
+                    <p className="font-cormorant text-2xl sm:text-3xl">{ref.organization}</p>
+                    <p className="mt-1 font-jost text-xs font-medium uppercase tracking-[0.16em] text-[#414a3d]/70">
+                      {ref.role} · {ref.location}
+                    </p>
+                    <a
+                      href={`tel:${ref.phone.replace(/[^0-9+]/g, '')}`}
+                      className="mt-1.5 inline-block font-jost text-base font-semibold text-[#9c5f3a] hover:underline"
+                    >
+                      {ref.phone}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={200}>
+              <h3 className="font-jost text-xs font-semibold uppercase tracking-[0.22em] text-[#9c5f3a]">
+                Certification verification
+              </h3>
+              <ul className="mt-5 space-y-6">
+                {references.certifications.map((ref) => (
+                  <li
+                    key={ref.name}
+                    className="border-t border-[#414a3d]/25 pt-4 transition-all duration-500 hover:border-[#b0714a] hover:pl-2"
+                  >
+                    <p className="font-cormorant text-2xl sm:text-3xl">{ref.name}</p>
+                    <p className="mt-1 font-jost text-xs font-medium uppercase tracking-[0.16em] text-[#414a3d]/70">
+                      {ref.credential} · {ref.location}
+                    </p>
+                    <a
+                      href={`tel:${ref.phone.replace(/[^0-9+]/g, '')}`}
+                      className="mt-1.5 inline-block font-jost text-base font-semibold text-[#9c5f3a] hover:underline"
+                    >
+                      {ref.phone}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </div>
       </section>

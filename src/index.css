@@ -83,6 +83,22 @@ body {
   animation-play-state: paused;
 }
 
+/* Soft pulsing dot on the availability badge */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.78);
+  }
+}
+.anim-pulse-dot {
+  animation: soft-pulse 2.2s ease-in-out infinite;
+}
+
 /* Petal confetti — spawned when the visitor clicks the signature */
 .petal {
   position: fixed;
@@ -114,7 +130,8 @@ body {
   }
   .anim-blob,
   .anim-sway,
-  .anim-marquee {
+  .anim-marquee,
+  .anim-pulse-dot {
     animation: none;
   }
   .anim-draw path {
