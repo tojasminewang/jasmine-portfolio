@@ -8,7 +8,6 @@ import {
   achievements,
   education,
   languages,
-  resume,
   contact,
 } from '../data/portfolioData.js';
 import Reveal from '../components/Reveal.jsx';
@@ -201,15 +200,119 @@ function BackToTop() {
   );
 }
 
+/* True when the visitor prefers reduced motion — switches off the playful bits */
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setReduced(mq.matches);
+    onChange();
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return reduced;
+}
+
+/* Card that tilts gently toward the cursor (skipped for reduced-motion users) */
+function Tilt({ children, max = 7, className = '' }) {
+  const ref = useRef(null);
+  const reduced = usePrefersReducedMotion();
+  const onMove = (e) => {
+    const el = ref.current;
+    if (!el || reduced) return;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = `perspective(700px) rotateX(${(-py * max).toFixed(2)}deg) rotateY(${(px * max).toFixed(2)}deg) scale(1.015)`;
+  };
+  const onLeave = () => {
+    if (ref.current) ref.current.style.transform = '';
+  };
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className={className}
+      style={{ transition: 'transform 300ms ease', willChange: 'transform' }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* Petal confetti — a soft burst wherever the visitor clicks the signature */
+const PETAL_COLORS = ['#b0714a', '#77815f', '#cbb197', '#eee3d3'];
+
+function usePetals() {
+  const [petals, setPetals] = useState([]);
+  const reduced = usePrefersReducedMotion();
+  const idRef = useRef(0);
+  const burst = (e) => {
+    if (reduced) return;
+    const { clientX: x, clientY: y } = e;
+    const batch = Array.from({ length: 14 }, () => ({
+      id: ++idRef.current,
+      x,
+      y,
+      dx: (Math.random() - 0.5) * 260,
+      dy: 120 + Math.random() * 260,
+      rot: (Math.random() - 0.5) * 540,
+      dur: 900 + Math.random() * 900,
+      size: 9 + Math.random() * 8,
+      color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
+    }));
+    setPetals((p) => [...p, ...batch]);
+    const ids = new Set(batch.map((b) => b.id));
+    setTimeout(() => setPetals((p) => p.filter((pt) => !ids.has(pt.id))), 2100);
+  };
+  const layer = (
+    <div aria-hidden="true">
+      {petals.map((p) => (
+        <span
+          key={p.id}
+          className="petal"
+          style={{
+            left: p.x,
+            top: p.y,
+            width: p.size,
+            height: p.size * 0.72,
+            backgroundColor: p.color,
+            '--dx': `${p.dx}px`,
+            '--dy': `${p.dy}px`,
+            '--rot': `${p.rot}deg`,
+            '--dur': `${p.dur}ms`,
+          }}
+        />
+      ))}
+    </div>
+  );
+  return { burst, layer };
+}
+
 export default function Atelier() {
   const menu = useMenu();
   const stats = derivedStats();
   const active = useActiveSection();
+  const petals = usePetals();
+  const reduced = usePrefersReducedMotion();
+
+  /* Gentle parallax: the hero art drifts toward the cursor */
+  const heroRef = useRef(null);
+  const [par, setPar] = useState({ x: 0, y: 0 });
+  const onHeroMove = (e) => {
+    if (reduced) return;
+    const r = heroRef.current?.getBoundingClientRect();
+    if (!r) return;
+    setPar({ x: (e.clientX - r.left) / r.width - 0.5, y: (e.clientY - r.top) / r.height - 0.5 });
+  };
+  const resetPar = () => setPar({ x: 0, y: 0 });
 
   return (
     <div id="home" className="min-h-screen" style={{ backgroundColor: CREAM, color: INK }}>
       <ScrollProgress />
       <BackToTop />
+      {petals.layer}
       {/* ---------- Navbar ---------- */}
       <header className="sticky top-0 z-40 border-b border-[#414a3d]/10 bg-[#f7f3ec]/90 backdrop-blur">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main navigation">
@@ -269,7 +372,12 @@ export default function Atelier() {
       </header>
 
       {/* ---------- Hero ---------- */}
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-2">
+      <section
+        ref={heroRef}
+        onMouseMove={onHeroMove}
+        onMouseLeave={resetPar}
+        className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-2"
+      >
         <Reveal>
           <h1 className="font-cormorant text-6xl leading-[0.95] sm:text-8xl">
             {basics.name.split(' ')[0]}
@@ -284,7 +392,16 @@ export default function Atelier() {
           <p className="mt-5 max-w-lg font-jost text-lg leading-relaxed text-[#414a3d]">
             {basics.intro}
           </p>
-          <p className="mt-8 font-script text-4xl text-[#b0714a]">{basics.name}</p>
+          <button
+            type="button"
+            onClick={petals.burst}
+            className="mt-8 block cursor-pointer font-script text-4xl text-[#b0714a] transition-transform duration-300 hover:-rotate-2 hover:scale-105"
+          >
+            {basics.name}
+          </button>
+          <p className="mt-1 font-jost text-[10px] uppercase tracking-[0.3em] text-[#414a3d]/45">
+            psst, click the signature
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <OutlineButton href="#experience">View Experience</OutlineButton>
             <OutlineButton href="#achievements">View Achievements</OutlineButton>
@@ -293,15 +410,24 @@ export default function Atelier() {
         </Reveal>
         <Reveal delay={150}>
           <div className="relative mx-auto max-w-md">
-            {/* Photo placeholder — swap for a real portrait later */}
+            {/* EDIT: basics.heroImage in portfolioData.js — swap the illustration for a real portrait anytime */}
             <div
-              className="anim-blob relative flex aspect-[4/5] items-end justify-center overflow-hidden bg-gradient-to-br from-[#eee3d3] via-[#e4d5c0] to-[#d8c3a8]"
-              style={{ borderRadius: '58% 42% 55% 45% / 48% 55% 45% 52%' }}
+              className="anim-blob relative aspect-[4/5] overflow-hidden bg-[#eee3d3]"
+              style={{
+                borderRadius: '58% 42% 55% 45% / 48% 55% 45% 52%',
+                transform: `translate3d(${par.x * 14}px, ${par.y * 14}px, 0)`,
+                transition: 'transform 250ms ease-out',
+              }}
             >
-              <Sprig className="anim-sway absolute right-8 top-10 h-24 w-16 opacity-40" stroke={INK} />
-              <p className="mb-10 font-jost text-[10px] uppercase tracking-[0.3em] text-[#414a3d]/40">
-                Your photo here
-              </p>
+              <img
+                src={basics.heroImage}
+                alt="Illustration of a sunlit study desk with books and plants"
+                className="h-full w-full object-cover"
+                style={{
+                  transform: `scale(1.08) translate3d(${par.x * -10}px, ${par.y * -10}px, 0)`,
+                  transition: 'transform 250ms ease-out',
+                }}
+              />
             </div>
             <svg viewBox="0 0 200 80" className="anim-draw absolute -bottom-6 -left-10 h-20 w-52 text-[#b0714a]/60" aria-hidden="true">
               <path d="M4 70C60 70 90 8 196 22" pathLength="1" stroke="currentColor" strokeWidth="1" fill="none" />
@@ -320,12 +446,24 @@ export default function Atelier() {
       <section id="about" style={{ backgroundColor: OLIVE }}>
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:py-20 lg:grid-cols-[1fr_1.4fr_1fr]">
           <Reveal>
-            <div
-              className="mx-auto flex h-72 w-56 items-center justify-center bg-[#eee3d3]"
-              style={{ borderRadius: '999px 999px 8px 8px' }}
-            >
-              <Sprig className="anim-sway h-28 w-20 text-[#77815f]" stroke="#77815f" />
-            </div>
+            <figure className="mx-auto w-fit">
+              {/* EDIT: about.image / about.imageCaption in portfolioData.js */}
+              <div
+                className="group h-72 w-56 overflow-hidden bg-[#eee3d3]"
+                style={{ borderRadius: '999px 999px 8px 8px' }}
+              >
+                <img
+                  src={about.image}
+                  alt="Illustration of rock climbing gear"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:rotate-2 group-hover:scale-110"
+                />
+              </div>
+              {about.imageCaption && (
+                <figcaption className="mt-3 text-center font-jost text-[10px] uppercase tracking-[0.3em] text-[#f0ece0]">
+                  {about.imageCaption}
+                </figcaption>
+              )}
+            </figure>
           </Reveal>
           <Reveal delay={120}>
             <div className="border-[#e8e3d2]/40 lg:border-l lg:pl-12">
@@ -377,7 +515,8 @@ export default function Atelier() {
         <div className="mt-10 flex flex-wrap justify-center gap-10">
           {projects.map((project, i) => (
             <Reveal key={project.title} delay={i * 120} className="w-full max-w-xs">
-              <article className="group text-center">
+              <Tilt>
+                <article className="group text-center">
                 <div className="overflow-hidden transition-transform duration-500 group-hover:-translate-y-1.5">
                   <div
                     className="flex aspect-[5/4] items-center justify-center px-6 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
@@ -411,7 +550,8 @@ export default function Atelier() {
                     <OutlineButton disabled>{project.status}</OutlineButton>
                   )}
                 </div>
-              </article>
+                </article>
+              </Tilt>
             </Reveal>
           ))}
         </div>
@@ -461,7 +601,7 @@ export default function Atelier() {
             <div className="mt-10 space-y-12">
               {experience.map((job, i) => (
                 <Reveal key={job.organization} delay={i * 120}>
-                  <article className="grid gap-5 border-t border-[#414a3d]/20 pt-6 sm:grid-cols-[4rem_1fr]">
+                  <article className="grid gap-5 border-t border-[#414a3d]/20 pt-6 sm:grid-cols-[4rem_1fr] lg:grid-cols-[4rem_1fr_10rem]">
                     <p className="font-cormorant text-4xl sm:text-5xl text-[#b0714a]">
                       {String(i + 1).padStart(2, '0')}
                     </p>
@@ -479,6 +619,19 @@ export default function Atelier() {
                         ))}
                       </ul>
                     </div>
+                    {/* EDIT: experience[].image in portfolioData.js */}
+                    {job.image && (
+                      <div
+                        className="group h-52 w-full overflow-hidden sm:col-start-2 lg:col-start-3 lg:h-44"
+                        style={{ borderRadius: '999px 999px 10px 10px' }}
+                      >
+                        <img
+                          src={job.image}
+                          alt={`${job.role} illustration`}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:-rotate-2 group-hover:scale-110"
+                        />
+                      </div>
+                    )}
                   </article>
                 </Reveal>
               ))}
@@ -513,21 +666,33 @@ export default function Atelier() {
             {achievements.map((item, i) => (
               <Reveal key={`${item.title}-${i}`} delay={i * 90}>
                 <div
-                  className={`border-t pt-5 transition-all duration-500 ${
+                  className={`group flex gap-5 border-t pt-5 transition-all duration-500 ${
                     item.placeholder
                       ? 'border-dashed border-[#e8e3d2]/40 opacity-60'
                       : 'border-[#e8e3d2]/50 hover:border-[#f4f0e4] hover:pl-3'
                   }`}
                 >
-                  <h3 className="font-cormorant text-3xl text-[#faf7ef]">{item.title}</h3>
-                  {item.issuer && (
-                    <p className="mt-1.5 font-jost text-xs font-semibold uppercase tracking-[0.18em] text-[#f0ece0]">
-                      {item.issuer}
-                    </p>
+                  {/* EDIT: achievements[].image in portfolioData.js */}
+                  {item.image && (
+                    <span className="mt-1 block h-16 w-16 shrink-0 overflow-hidden rounded-full border border-[#e8e3d2]/60 bg-[#f7f3ec]">
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+                      />
+                    </span>
                   )}
-                  {item.detail && (
-                    <p className="mt-2 font-jost text-sm italic text-[#faf7ef]/85">{item.detail}</p>
-                  )}
+                  <div>
+                    <h3 className="font-cormorant text-3xl text-[#faf7ef]">{item.title}</h3>
+                    {item.issuer && (
+                      <p className="mt-1.5 font-jost text-xs font-semibold uppercase tracking-[0.18em] text-[#f0ece0]">
+                        {item.issuer}
+                      </p>
+                    )}
+                    {item.detail && (
+                      <p className="mt-2 font-jost text-sm italic text-[#faf7ef]/85">{item.detail}</p>
+                    )}
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -545,8 +710,9 @@ export default function Atelier() {
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           {education.map((school, i) => (
             <Reveal key={school.school} delay={i * 120}>
+              <Tilt max={5} className="h-full">
               <div
-                className="flex h-full flex-col items-center px-10 py-12 text-center transition-transform duration-500 hover:-translate-y-2"
+                className="flex h-full flex-col items-center px-10 py-12 text-center"
                 style={{ backgroundColor: BLUSH, borderRadius: '999px 999px 12px 12px' }}
               >
                 <Sprig className="anim-sway h-10 w-8 text-[#77815f]" stroke="#77815f" />
@@ -558,6 +724,7 @@ export default function Atelier() {
                   <p className="mt-3 font-jost text-sm italic text-[#414a3d]/75">{school.note}</p>
                 )}
               </div>
+              </Tilt>
             </Reveal>
           ))}
         </div>
@@ -656,7 +823,13 @@ export default function Atelier() {
 
       {/* ---------- Footer ---------- */}
       <footer className="border-t border-[#414a3d]/15 py-8 text-center">
-        <p className="font-script text-2xl text-[#b0714a]">{basics.name}</p>
+        <button
+          type="button"
+          onClick={petals.burst}
+          className="cursor-pointer font-script text-2xl text-[#b0714a] transition-transform duration-300 hover:scale-110"
+        >
+          {basics.name}
+        </button>
         <p className="mt-1 font-jost text-xs font-medium uppercase tracking-[0.25em] text-[#414a3d]/60">
           © {new Date().getFullYear()} · {basics.title}
         </p>

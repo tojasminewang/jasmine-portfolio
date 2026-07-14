@@ -2,10 +2,25 @@
    PORTFOLIO DATA — this is the ONLY file you need to edit to change the
    content of your website. Every section reads from here.
 
-   Everything here comes from Jasmine's resume. A couple of fields are left
-   null on purpose (e.g. LinkedIn/GitHub, resume PDF) — fill them in when ready
-   and the matching part of the site turns on automatically.
+   HOW TO EDIT: change the words between the quotes ('like this') and save.
+   Don't delete the quotes or the commas. The site updates instantly in dev,
+   and the live site updates when you push to GitHub.
    ========================================================================== */
+
+// --------------------------------------------------------------------------
+// IMAGES — illustrations live in src/assets/img.
+// To change a picture, replace the matching file there (keep the same name),
+// or import a new file below and point the section at it.
+// --------------------------------------------------------------------------
+import heroDeskImg from '../assets/img/hero-desk.jpg';
+import climbingImg from '../assets/img/climbing.jpg';
+import artCampImg from '../assets/img/art-camp.jpg';
+import chineseCampImg from '../assets/img/chinese-camp.jpg';
+import lifesavingImg from '../assets/img/lifesaving.jpg';
+import firstAidImg from '../assets/img/first-aid.jpg';
+import skiImg from '../assets/img/ski.jpg';
+import mathImg from '../assets/img/math.jpg';
+import bloomSiteImg from '../assets/img/bloom-site.jpg';
 
 // --------------------------------------------------------------------------
 // BASICS — your name and title (shown in the navbar, hero, and footer)
@@ -15,50 +30,58 @@
 export const basics = {
   name: 'Jasmine Wang',
   title: 'High School Student',
-  location: 'Thornhill, Ontario', // city only — no street address on purpose
+  location: 'Thornhill, Ontario', // city only, no street address on purpose
 
-  // Hero headline — a short, punchy line about you (from your resume)
-  headline: 'High school student, summer-camp volunteer, and creator of the study website Bloom.',
+  // Hero headline: a short, punchy line about you
+  headline: 'High school student, camp volunteer, and certified ski instructor.',
 
   // A 1–2 sentence introduction shown under the headline
   intro:
-    "I'm a high school student in Thornhill, Ontario. I've volunteered 75+ hours with children at art and language summer camps, hold certifications in lifesaving, first aid, and ski instruction, and recently designed and built Bloom — a study website that helps students stay organized and productive.",
+    "I'm a high school student in Thornhill, Ontario. I've spent more than 75 hours volunteering with kids at summer camps, and I hold certifications in lifesaving, first aid, and ski instruction.",
+
+  // EDIT: the illustration in the hero. To use a real photo of you instead,
+  // drop it into src/assets/img, import it above, and point this at it.
+  heroImage: heroDeskImg,
 };
 
 // --------------------------------------------------------------------------
 // ABOUT
 // --------------------------------------------------------------------------
 export const about = {
-  text: "I'm a high school student at St. Robert Catholic High School, graduating in 2028. Over the past year I've volunteered more than 75 hours at summer camps — supporting and supervising children at Tzu Chi Canada's Chinese camp and Lolart's art camp — and I'm a member of my school's rock climbing team. I hold Bronze Cross, First Aid + CPR, and CSIA Level 1 ski-instructor certifications, and I've earned Certificates of Distinction in the Cayley, Galois, and Canadian Intermediate mathematics contests. Most recently, I designed and built Bloom, a study website that helps students organize their work and stay productive.",
+  text: "I'm a student at St. Robert Catholic High School, graduating in 2028. This past year I volunteered more than 75 hours at two summer camps, helping supervise children and keep the days running smoothly. Outside of class you'll find me on the school rock climbing team or on the ski hill, where I teach as a certified CSIA Level 1 instructor. I also hold Bronze Cross and First Aid + CPR certifications, and I've earned Certificates of Distinction in three University of Waterloo mathematics contests.",
+
   // A few quick facts shown beside the paragraph
   facts: [
     { label: 'Based in', value: 'Thornhill, Ontario' },
-    { label: 'Studies at', value: 'St. Robert CHS · Class of 2028' },
-    { label: 'Latest project', value: 'Bloom — a study website' },
+    { label: 'School', value: 'St. Robert CHS, Class of 2028' },
+    { label: 'Team', value: 'School rock climbing team' },
   ],
+
+  // The picture next to the About paragraph
+  image: climbingImg,
+  imageCaption: 'Rock climbing team',
 };
 
 // --------------------------------------------------------------------------
-// PROJECTS — from your resume.
-// To add a project: copy the { ... } block, paste it, and edit the fields.
-// Set `link` to a URL to turn the "View project" button on.
+// PROJECTS
+// To add a project: copy the { ... } block, paste it below, and edit.
+// Set `link` to a URL to turn on the "View project" button.
 // --------------------------------------------------------------------------
 export const projects = [
   {
     title: 'Bloom',
     category: 'Personal Project · June 2026',
     description:
-      'A study website I designed and built to help students organize their studying and stay productive. I planned the layout, features, and visual design, and developed the site myself.',
+      'A study website that helps students organize their studying and stay productive. I planned the layout and features, designed the visuals, and built the site.',
     tools: ['Web Design', 'Layout & Features', 'Visual Design'],
     status: 'Completed',
-    image: null, // EDIT: add a screenshot to /public and use e.g. '/bloom.png'
+    image: bloomSiteImg, // a real screenshot of the live site
     link: 'https://bloomgardenapp.github.io/',
   },
 ];
 
 // --------------------------------------------------------------------------
-// SKILLS — from your resume.
-// (You can add more later: copy a block and edit the fields.)
+// SKILLS
 // --------------------------------------------------------------------------
 export const skills = [
   {
@@ -85,8 +108,9 @@ export const experience = [
   {
     role: 'Chinese Camp Volunteer',
     organization: 'Tzu Chi Canada Summer Camp',
-    period: 'July 9 – July 25, 2025',
+    period: 'July 9 to July 25, 2025',
     hours: '55 hours',
+    image: chineseCampImg,
     bullets: [
       'Supervised children throughout daily camp activities and escorted them safely to and from facilities.',
       'Set up activities, distributed supplies, and refilled water bottles to keep the camp day running smoothly.',
@@ -96,8 +120,9 @@ export const experience = [
   {
     role: 'Art Camp Volunteer',
     organization: 'Lolart Camp',
-    period: 'August 18 – August 20, 2025',
+    period: 'August 18 to August 20, 2025',
     hours: '21 hours',
+    image: artCampImg,
     bullets: [
       'Organized and sorted art supplies, including markers, crayons, and other materials.',
       'Relabeled name tags and assembled personalized art portfolios for the children.',
@@ -109,38 +134,42 @@ export const experience = [
 ];
 
 // --------------------------------------------------------------------------
-// ACHIEVEMENTS — from your resume.
-// (issuer / detail are optional; leave as null if you don't want to show one.)
+// ACHIEVEMENTS
+// (issuer and detail are optional; set one to null to hide that line)
 // --------------------------------------------------------------------------
 export const achievements = [
   {
     title: 'Bronze Cross Certification',
     issuer: 'Lifesaving Society',
     detail: null,
+    image: lifesavingImg,
     placeholder: false,
   },
   {
     title: 'First Aid + CPR Certification',
     issuer: null,
     detail: null,
+    image: firstAidImg,
     placeholder: false,
   },
   {
     title: 'CSIA Level 1 Ski Instructor Certification',
     issuer: 'Canadian Ski Instructors’ Alliance · Uplands Ski Centre',
     detail: 'Completed January 4, 2026',
+    image: skiImg,
     placeholder: false,
   },
   {
-    title: 'Certificates of Distinction — Mathematics Contests',
+    title: 'Certificates of Distinction in Mathematics',
     issuer: 'University of Waterloo, Centre for Education in Mathematics and Computing',
     detail: 'Cayley, Galois, and Canadian Intermediate Mathematics Contest (CIMC)',
+    image: mathImg,
     placeholder: false,
   },
 ];
 
 // --------------------------------------------------------------------------
-// EDUCATION — from your resume
+// EDUCATION
 // --------------------------------------------------------------------------
 export const education = [
   {
@@ -156,7 +185,7 @@ export const education = [
 ];
 
 // --------------------------------------------------------------------------
-// LANGUAGES — from your resume. `level` is 1–3 (Basic / Conversational / Fluent)
+// LANGUAGES — `level` is 1 to 3 (Basic / Conversational / Fluent)
 // --------------------------------------------------------------------------
 export const languages = [
   { name: 'English', proficiency: 'Fluent', level: 3 },
@@ -165,16 +194,7 @@ export const languages = [
 ];
 
 // --------------------------------------------------------------------------
-// RESUME — when your PDF is ready, put it in the /public folder
-// (e.g. public/resume.pdf) and set url to '/resume.pdf'
-// --------------------------------------------------------------------------
-export const resume = {
-  url: null, // EDIT: set to '/resume.pdf' once you add the file to /public
-  comingSoonText: 'Resume PDF coming soon',
-};
-
-// --------------------------------------------------------------------------
-// CONTACT — your email is real; add LinkedIn/GitHub later if you want them shown
+// CONTACT — your email is real; add LinkedIn/GitHub later to show them
 // --------------------------------------------------------------------------
 export const contact = {
   email: 'tojasmineewang@gmail.com',

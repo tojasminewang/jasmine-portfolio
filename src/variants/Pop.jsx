@@ -7,7 +7,6 @@ import {
   achievements,
   education,
   languages,
-  resume,
   contact,
 } from '../data/portfolioData.js';
 import Reveal from '../components/Reveal.jsx';
