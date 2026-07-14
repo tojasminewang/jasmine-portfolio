@@ -45,7 +45,7 @@ function Eyebrow({ children, light = false }) {
 
 function OutlineButton({ href, children, light = false, disabled = false }) {
   const base =
-    'inline-block border px-7 py-3 font-jost text-xs font-semibold uppercase tracking-[0.22em] transition-all duration-300 hover:tracking-[0.3em]';
+    'inline-block border px-7 py-3.5 font-jost text-xs font-semibold uppercase tracking-[0.22em] transition-all duration-300 hover:tracking-[0.3em]';
   const tone = light
     ? 'border-[#e8e3d2]/70 text-[#f4f0e4] hover:bg-[#f4f0e4] hover:text-[#5c6547]'
     : 'border-[#414a3d]/50 text-[#414a3d] hover:bg-[#414a3d] hover:text-[#f7f3ec]';
@@ -378,7 +378,7 @@ export default function Atelier() {
         ref={heroRef}
         onMouseMove={onHeroMove}
         onMouseLeave={resetPar}
-        className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-8 sm:py-10 lg:grid-cols-2"
+        className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-10 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-2 lg:py-8"
       >
         <Reveal>
           <h1 className="font-cormorant text-5xl leading-[0.95] sm:text-6xl xl:text-7xl">
@@ -387,17 +387,17 @@ export default function Atelier() {
             {basics.name.split(' ').slice(1).join(' ')}
           </h1>
           {/* EDIT: basics.headline in portfolioData.js */}
-          <p className="mt-4 max-w-lg font-jost text-base font-semibold uppercase leading-relaxed tracking-[0.18em] text-[#9c5f3a]">
+          <p className="mt-6 max-w-lg font-jost text-base font-semibold uppercase leading-relaxed tracking-[0.18em] text-[#9c5f3a]">
             {basics.headline}
           </p>
           {/* EDIT: basics.intro in portfolioData.js */}
-          <p className="mt-3 max-w-lg font-jost text-lg leading-relaxed text-[#414a3d]">
+          <p className="mt-4 max-w-lg font-jost text-lg leading-relaxed text-[#414a3d]">
             {basics.intro}
           </p>
           {/* Availability badge — EDIT: availability.headline / availability.summary in portfolioData.js */}
           <a
             href="#contact"
-            className="mt-4 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 rounded-full border border-[#77815f]/50 bg-[#77815f]/10 px-5 py-2 transition-colors duration-300 hover:border-[#77815f] hover:bg-[#77815f]/15"
+            className="mt-6 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 rounded-full border border-[#77815f]/50 bg-[#77815f]/10 px-5 py-2.5 transition-colors duration-300 hover:border-[#77815f] hover:bg-[#77815f]/15"
           >
             <span className="anim-pulse-dot h-2 w-2 rounded-full bg-[#77815f]" aria-hidden="true" />
             <span className="font-jost text-[11px] font-bold uppercase tracking-[0.18em] text-[#414a3d]">
@@ -412,11 +412,11 @@ export default function Atelier() {
             type="button"
             onClick={petals.burst}
             aria-label={basics.name}
-            className="mt-4 block cursor-pointer font-script text-3xl text-[#b0714a] transition-transform duration-300 hover:-rotate-2 hover:scale-105"
+            className="mt-6 block cursor-pointer font-script text-3xl sm:text-4xl text-[#b0714a] transition-transform duration-300 hover:-rotate-2 hover:scale-105"
           >
             {basics.name}
           </button>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3">
             <OutlineButton href="#experience">View Experience</OutlineButton>
             <OutlineButton href="#achievements">View Achievements</OutlineButton>
             <OutlineButton href="#contact">Contact Me</OutlineButton>
@@ -429,7 +429,7 @@ export default function Atelier() {
             <div
               className="anim-blob relative overflow-hidden bg-[#eee3d3]"
               style={{
-                height: 'min(62vh, 33rem)',
+                height: 'min(66vh, 35rem)',
                 aspectRatio: '4 / 5',
                 borderRadius: '58% 42% 55% 45% / 48% 55% 45% 52%',
                 transform: `translate3d(${par.x * 14}px, ${par.y * 14}px, 0)`,
