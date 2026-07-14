@@ -772,7 +772,6 @@ export default function Atelier() {
               style={{ backgroundColor: OLIVE, borderRadius: '999px 999px 16px 16px' }}
             >
               <Sprig className="h-10 w-8" stroke="#f4f0e4" />
-              <p className="font-script text-3xl text-[#e8e3d2]">say hello</p>
               <h2 className="font-cormorant text-4xl sm:text-5xl leading-tight">Let’s get in touch.</h2>
               {/* EDIT: contact.message in portfolioData.js */}
               <p className="max-w-sm font-jost text-base leading-relaxed text-[#faf7ef]/95">

@@ -201,5 +201,5 @@ export const contact = {
   linkedin: null, // EDIT: e.g. 'https://www.linkedin.com/in/your-profile'
   github: null, // EDIT: e.g. 'https://github.com/your-username'
   message:
-    "I'm currently open to part-time employment and the best way to contact me is by email.",
+    "I'm open to part-time work opportunities, and the best way to reach me is by email.",
 };
