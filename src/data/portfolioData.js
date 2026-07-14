@@ -37,7 +37,7 @@ export const basics = {
 
   // A 1–2 sentence introduction shown under the headline
   intro:
-    "I'm a high school student in Thornhill, Ontario, with interests in website design, technology, mathematics, and creative projects. Along with building digital projects, I have completed more than 75 hours of volunteer work and earned certifications in ski instruction, lifesaving, first aid, and CPR.",
+    'I am a hardworking and dependable high school student in Thornhill, Ontario, who is committed to learning, contributing to the team, and creating a positive experience for customers.',
 
   // EDIT: the illustration in the hero. To use a real photo of you instead,
   // drop it into src/assets/img, import it above, and point this at it.
