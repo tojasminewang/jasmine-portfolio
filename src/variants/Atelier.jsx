@@ -392,16 +392,15 @@ export default function Atelier() {
           <p className="mt-5 max-w-lg font-jost text-lg leading-relaxed text-[#414a3d]">
             {basics.intro}
           </p>
+          {/* Signature — clicking it releases a quiet petal flourish */}
           <button
             type="button"
             onClick={petals.burst}
+            aria-label={basics.name}
             className="mt-8 block cursor-pointer font-script text-4xl text-[#b0714a] transition-transform duration-300 hover:-rotate-2 hover:scale-105"
           >
             {basics.name}
           </button>
-          <p className="mt-1 font-jost text-[10px] uppercase tracking-[0.3em] text-[#414a3d]/45">
-            psst, click the signature
-          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <OutlineButton href="#experience">View Experience</OutlineButton>
             <OutlineButton href="#achievements">View Achievements</OutlineButton>
